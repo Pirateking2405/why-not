@@ -30,6 +30,6 @@ module.exports = {
         }
       )
 
-    msg.channel.send(embed)
+    msg.lineReplyNoMention(embed)
   },
 };

@@ -5,7 +5,7 @@ module.exports = {
 	name: 'ping',
 	description: 'ping',
 	async execute(msg, args) {
-		const message = await msg.channel.send(`🏓 Pinging....`);
+		const message = await msg.lineReplyNoMention(`🏓 Pinging....`);
 
 		message.edit(`🏓 Pong!`);
 	},

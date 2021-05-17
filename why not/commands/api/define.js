@@ -32,6 +32,6 @@ module.exports = {
 				{ name: 'Definition', value: trim(answer.definition, 1024) },
 				{ name: 'Example', value: trim(answer.example, 1024) },
 			);
-		msg.channel.send(embed);
+		msg.lineReplyNoMention(embed);
 	},
 };

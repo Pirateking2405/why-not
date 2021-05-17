@@ -61,7 +61,7 @@ module.exports = {
 			},
 		)
     .addField('Roles', `<@&${member._roles.join('> <@&')}>`)
-    msg.channel.send(userEmbed);
+    msg.lineReplyNoMention(userEmbed);
 	},
 };
 

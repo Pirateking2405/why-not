@@ -17,6 +17,6 @@ module.exports = {
         )
         .setTimestamp()
         .setFooter('Joke sourced from https://icanhazdadjoke.com/');
-      message.channel.send(jokeEmbed)
+      message.lineReplyNoMention(jokeEmbed)
     });
 }};
