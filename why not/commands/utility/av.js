@@ -9,6 +9,6 @@ module.exports = {
         .setColor(0x3d9af2)
         .setAuthor(user.username)
         .setImage(user.displayAvatarURL());
-    msg.channel.send(avatarEmbed);
+    msg.lineReplyNoMention(avatarEmbed);
   },
 };
