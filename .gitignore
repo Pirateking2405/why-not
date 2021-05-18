@@ -1,4 +1,3 @@
 .env
-config.json
 /commands/fun/*
 /node_modules/*
