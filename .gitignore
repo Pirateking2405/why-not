@@ -1,5 +1,6 @@
 .env
-/commands/fun/*
-/node_modules/*
 *.json
+/node_modules/*
+/commands/fun/*
+.replit
 server.js
