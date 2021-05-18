@@ -7,6 +7,6 @@ module.exports = {
         if(!Member) return message.channel.send('Please specify a member to kick');
 
         await Member.kick({ reason: args.slice(1).join(" ") })
-        message.cnhannel.send(`${Member.user.tag} was kicked from the server!`)
+        message.lineReplyNoMention(`${Member.user.tag} was kicked from the server!`)
 	},
 };
