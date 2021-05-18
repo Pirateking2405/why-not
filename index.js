@@ -2,7 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const keepAlive = require("./server")
 require('discord-reply');
-
+const db = require('quick.db')
 const {
 	prefix
 } = require('./config.json');
@@ -31,6 +31,28 @@ client.on('ready', () => {
 
 client.on("message", gotMessage);
 async function gotMessage(msg) {
+	let afk  = new db.table("AFKs");
+    authorStatus = await afk.fetch(msg.author.id),
+    mentioned = msg.mentions.members.first();
+
+	if (mentioned) {
+    let status = await afk.fetch(mentioned.id);
+
+    if (status) {
+        const embed = new MessageEmbed()
+        .setColor(0xffffff)
+        .setDescription(`This user (${mentioned.user.tag}) is AFK: **${status}**`)
+        msg.lineReplyNoMention(embed).then(i => i.delete({timeout: 5000}));
+    }
+}
+	if (authorStatus) {
+		const embed = new MessageEmbed()
+		.setColor(0xffffff)
+		.setDescription(`**${msg.author.tag}** is no longer AFK`)
+		msg.lineReplyNoMention(embed).then(i => i.delete({timeout: 5000}));
+		afk.delete(msg.author.id);
+	}
+
   if (msg.author.bot) return
   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
@@ -48,4 +70,4 @@ try {
 }
 };
 keepAlive()
-client.login(process.env.DISCORD_BOT_SECRET);
+client.login(token);
