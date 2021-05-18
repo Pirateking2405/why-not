@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const keep_alive = require('./keep_alive.js')
+const keepAlive = require("./server")
 require('discord-reply');
 
 const {
@@ -64,4 +64,5 @@ try {
   }
 
 };
+keepAlive()
 client.login(process.env.DISCORD_BOT_SECRET);
