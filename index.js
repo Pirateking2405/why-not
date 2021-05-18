@@ -46,23 +46,6 @@ try {
 	console.error(error);
 	msg.reply('there was an error trying to execute that command!');
 }
-
-
- if (command === 'holy watah') {
-    msg.channel.send('*launching holy water canons in 3... 2... 1... **LAUNCH***');
-  }
-
-
-
-  else if (command === 'revive chat') {
-    msg.channel.send('Dead chat reported... 1...2...3... cleared! shit its still ded');
-  }
-
-
-  else if (command === 'kill chat') {
-    msg.channel.send('shut up and die');
-  }
-
 };
 keepAlive()
 client.login(process.env.DISCORD_BOT_SECRET);
