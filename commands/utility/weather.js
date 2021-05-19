@@ -9,10 +9,10 @@ module.exports = {
 
     async execute (message, args) {
         weather.find({search: args.join(" "), degreeType: `C`}, function (error, result) {
-            if(error) return message.channel.send(error);
-            if(!args[0]) return message.channel.send('Please specify a location!')
+            if(error) return message.lineReplyNoMention(error);
+            if(!args[0]) return message.lineReplyNoMention('Please specify a location!')
 
-            if(result === undefined || result.length === 0) return message.channel.send('**invlaid** location!!')
+            if(result === undefined || result.length === 0) return message.lineReplyNoMention('**invlaid** location!!')
 
             var current = result[0].current;
             var location = result[0].location;
@@ -29,7 +29,7 @@ module.exports = {
             .addField('Feels Like', `${current.feelslike}°`, true)
             .addField('Humidity', `${current.humidity}%`, true)
 
-            message.channel.send(embed)
+            message.lineReplyNoMention(embed)
         })
     }
 }
