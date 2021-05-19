@@ -31,12 +31,13 @@ client.on('message', message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
     if (!client.commands.has(commandName)) return;
+	if (command.guildOnly && message.channel.type === 'dm') {
+		return message.reply('I can\'t execute that command inside DMs!');
+	  }
 
 	try {
 		client.commands.get(commandName).execute(message, args);
-		if (command.guildOnly && message.channel.type === 'dm') {
-			return message.reply('I can\'t execute that command inside DMs!');
-		}
+		console.log(`${message.author.username}#${message.author.discriminator} ran \'${commandName}\' command.`);
 	} catch (error) {
 		console.error(error);
 		message.reply('there was an error trying to execute that command!');

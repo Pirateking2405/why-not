@@ -2,12 +2,40 @@ module.exports = {
 	name: 'kick',
         guildOnly: true,
 	description: 'kick',
+        permissions: 'KICK_MEMBERS',
 	async execute(message, args) {
-        if(!message.guild.me.hasPermission('KICK_MEMBERS')) return message.channel.send('I do not have permission')
-        const Member = message.mentions.members.first()
-        if(!Member) return message.channel.send('Please specify a member to kick');
+        const Discord = require('discord.js');
+        const client = new Discord.Client();
+        const mentionMember = message.mentions.members.first();
+        let reason = args.slice(1).join(" "); //.kick <args(0) aka @member> | <args(1) aka reason>
+        if (!reason) reason = "No reason given";
 
-        await Member.kick({ reason: args.slice(1).join(" ") })
-        message.lineReplyNoMention(`${Member.user.tag} was kicked from the server!`)
+        const kickembed = new Discord.MessageEmbed()
+        .setTitle(`You were kicked from **${message.guild.name}**`)
+        .setDescription(`Reason: ${reason}`)
+        .setColor("RANDOM")
+        .setTimestamp()
+        //.setFooter(client.user.tag, client.user.displayAvatarURL())
+
+        if (!args[0]) return message.lineReplyNoMention("You need to specify a user to kick");
+
+        if(!mentionMember) return message.lineReplyNoMention("This user is not a valid user / is no longer in the server!");
+
+        if(!mentionMember.kickable) return message.lineReplyNoMention("I was unable to kick this user!");
+
+
+        try {
+            await mentionMember.send(kickembed);
+        } catch (err) {
+
+        }
+
+        try {
+            await mentionMember.kick(reason);
+            console.log(mentionMember)
+            //message.lineReplyNoMention(`Kicked ${mentionMember}`)
+        } catch (err) {
+            return message.lineReplyNoMention("I was unabe to kick this user! Sorry...")
+        }
 	},
 };

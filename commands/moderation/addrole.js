@@ -1,5 +1,3 @@
-const { Message } = require('discord.js')
-
 module.exports = {
     name: 'addrole',
     guildOnly: true,
