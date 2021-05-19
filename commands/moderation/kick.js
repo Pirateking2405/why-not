@@ -32,8 +32,7 @@ module.exports = {
 
         try {
             await mentionMember.kick(reason);
-            console.log(mentionMember)
-            //message.lineReplyNoMention(`Kicked ${mentionMember}`)
+            message.lineReplyNoMention(`Kicked ${mentionMember}`)
         } catch (err) {
             return message.lineReplyNoMention("I was unabe to kick this user! Sorry...")
         }
