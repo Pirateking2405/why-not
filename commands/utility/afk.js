@@ -1,4 +1,4 @@
-const db = require('quick.db')
+//const db = require('quick.db')
 const { MessageEmbed } = require('discord.js')
 
  /* let afk  = new db.table("AFKs");
