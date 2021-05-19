@@ -2,6 +2,7 @@ const { Client, MessageEmbed, MessageAttachment, ZlibSync, Collection } = requir
 
 module.exports = {
 	name: 'serverinfo',
+  guildOnly: true,
 	description: 'serverinfo',
 	execute(msg, args) {
 		const { guild } = msg

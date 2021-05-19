@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'ban',
+        guildOnly: true,
 	description: 'ban',
 	async execute(message, args) {
         if(!message.guild.me.hasPermission('BAN_MEMBERS')) return message.channel.send('I do not have permission')

@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'kick',
+        guildOnly: true,
 	description: 'kick',
 	async execute(message, args) {
         if(!message.guild.me.hasPermission('KICK_MEMBERS')) return message.channel.send('I do not have permission')

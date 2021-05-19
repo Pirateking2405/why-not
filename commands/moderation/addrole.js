@@ -1,7 +1,8 @@
 const { Message } = require('discord.js')
 
 module.exports = {
-    name : 'addrole',
+    name: 'addrole',
+    guildOnly: true,
     async execute(message, args) {
         //lets use parameters (optional)
         /**

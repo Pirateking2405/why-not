@@ -3,6 +3,7 @@ const moment = require('moment');
 
 module.exports = {
 	name: 'userinfo',
+	guildOnly: true,
 	description: 'userinfo',
 	async execute(msg, args) {
 		let userArray = msg.content.split(" ");
