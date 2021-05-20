@@ -19,12 +19,16 @@ for (const folder of commandFolders) {
 	}
 }
 
-client.on('ready', () => {
-  console.log("I'm in");
-  console.log(client.user.username);
-  client.user.setActivity(`on ${client.guilds.cache.size} servers`);
-});
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args, client));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args, client));
+	}
+}
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -43,5 +47,7 @@ client.on('message', message => {
 		message.reply('there was an error trying to execute that command!');
 	}
 });
+
+
 keepAlive()
 client.login(token);
