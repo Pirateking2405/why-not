@@ -9,6 +9,7 @@ client.aliases = new Discord.Collection();
 require('dotenv').config()
 const token = process.env.DISCORD_BOT_SECRET;
 
+const DisTube = require('distube')
 const commandFolders = fs.readdirSync('./commands');
 
 for (const folder of commandFolders) {
@@ -47,6 +48,15 @@ client.on('message', message => {
 		message.reply('there was an error trying to execute that command!');
 	}
 });
+
+client.distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
+client.distube
+    .on("playSong", (message, queue, song) => message.channel.send(
+        `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`
+	))
+	.on("addSong", (message, queue, song) => message.channel.send(
+        `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`
+    ))
 
 
 keepAlive()
