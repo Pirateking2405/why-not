@@ -30,7 +30,7 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args, client));
 	}
 }
-client.on('message', message => {
+client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);

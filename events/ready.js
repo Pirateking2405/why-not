@@ -5,5 +5,6 @@ module.exports = {
 		console.log("I'm in");
         console.log(client.user.username);
         client.user.setActivity(`on ${client.guilds.cache.size} servers`);
+		client.user.setStatus('idle');
 	},
 };
