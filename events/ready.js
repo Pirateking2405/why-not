@@ -4,7 +4,6 @@ module.exports = {
 	execute(client) {
 		console.log("I'm in");
         console.log(client.user.username);
-        client.user.setActivity(`on ${client.guilds.cache.size} servers`);
-		client.user.setStatus('idle');
+		client.user.setPresence({ activity: { name: `on ${client.guilds.cache.size} servers` }, status: 'idle' });
 	},
 };
