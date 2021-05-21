@@ -38,6 +38,15 @@ client.on('message', message => {
     if (!client.commands.has(commandName)) return;
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	if (command.args && !args.length) {
+		let reply = `You didn't provide any arguments, ${message.author}!`;
+
+		if (command.usage) {
+			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+		}
+	
+		return message.lineReplyNoMention(reply);
+		}
 	if(!command) return;
 
 	try {
@@ -45,7 +54,7 @@ client.on('message', message => {
 		console.log(`${message.author.username}#${message.author.discriminator} ran \'${commandName}\' command.`);
 	} catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that command!');
+		message.lineReplyNoMention('there was an error trying to execute that command!');
 	}
 });
 
