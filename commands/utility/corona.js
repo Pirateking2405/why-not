@@ -1,4 +1,4 @@
-const Discord = require("discord.js")
+/* const Discord = require("discord.js")
 const { NovelCovid } = require("novelcovid");
 const track = new NovelCovid();
 
@@ -42,4 +42,4 @@ module.exports = {
         return message.lineReplyNoMention(embed)
     }
   }
-}
+} */
