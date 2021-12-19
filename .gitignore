@@ -1,7 +1,5 @@
 .env
 /node_modules/*
-/commands/fun/*
 .replit
 server.js
 config.json
-json.sqlite

@@ -1,9 +1,9 @@
-date = new Date();
+const date = new Date();
 
 module.exports = {
 	name: 'time',
 	description: 'time',
-	execute(msg, args) {
+	execute(msg) {
 		msg.lineReplyNoMention(`${date.toLocaleString('de-DE', { hour12: false, timeZone: 'Asia/Kolkata' })}`);
 	},
 };

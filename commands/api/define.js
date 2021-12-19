@@ -1,4 +1,4 @@
-const { Client, MessageEmbed, MessageAttachment, ZlibSync, Collection } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
 const trim = (str, max) => (str.length > max ? `${str.slice(0, max - 3)}...` : str);
 
@@ -6,8 +6,8 @@ module.exports = {
 	name: 'define',
 	description: 'define',
 	async execute(msg, args) {
-    const querystring = require('querystring');
-    if (!args.length) {
+		const querystring = require('querystring');
+		if (!args.length) {
 			return msg.channel.send('You need to supply a search term!');
 		}
 
@@ -23,10 +23,10 @@ module.exports = {
 
 		const embed = new MessageEmbed()
 			.setColor('#9a47ed')
-			.setTitle(answer.word.replace(/^\w/, function (c) {
-          return c.toUpperCase();
-        }))
-      .setThumbnail('https://cdn.discordapp.com/attachments/835571066280738866/837256920272076830/f2aa3712516cfd0cf6f215301d87a7c2.png')
+			.setTitle(answer.word.replace(/^\w/, function(c) {
+				return c.toUpperCase();
+			}))
+			.setThumbnail('https://cdn.discordapp.com/attachments/835571066280738866/837256920272076830/f2aa3712516cfd0cf6f215301d87a7c2.png')
 			.setURL(answer.permalink)
 			.addFields(
 				{ name: 'Definition', value: trim(answer.definition, 1024) },
