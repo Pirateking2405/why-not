@@ -11,7 +11,7 @@ module.exports = {
   async execute(message, args) {
     if(args.join(" ") === "all") {
         let corona = await track.all() //it will give global cases
-        
+
         let embed = new Discord.MessageEmbed()
         .setTitle("Global Cases")
         .setColor("#ff2050")
@@ -22,12 +22,12 @@ module.exports = {
         .addField("Today's Cases", corona.todayCases, true)
         .addField("Today's Deaths", corona.todayDeaths, true)
         .addField("Active Cases", corona.active, true);
-        
+
         return message.lineReplyNoMention(embed)
     }
     else {
         let corona = await track.countries(args.join(" ")) //change it to countries
-        
+
         let embed = new Discord.MessageEmbed()
         .setTitle(`${corona.country}`)
         .setColor("#ff2050")
@@ -38,7 +38,7 @@ module.exports = {
         .addField("Today's Cases", corona.todayCases, true)
         .addField("Today's Deaths", corona.todayDeaths, true)
         .addField("Active Cases", corona.active, true);
-        
+
         return message.lineReplyNoMention(embed)
     }
   }

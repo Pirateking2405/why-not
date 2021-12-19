@@ -1,16 +1,16 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const keepAlive = require("./server")
+const keepAlive = require('./server');
 require('discord-reply');
 const { prefix } = require('./config.json');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
-require('dotenv').config()
+require('dotenv').config();
 const token = process.env.DISCORD_BOT_SECRET;
 
-const DisTube = require('distube')
+const DisTube = require('distube');
 const commandFolders = fs.readdirSync('./commands');
 
 for (const folder of commandFolders) {
@@ -27,7 +27,8 @@ for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args, client));
-	} else {
+	}
+	else {
 		client.on(event.name, (...args) => event.execute(...args, client));
 	}
 }
@@ -36,7 +37,7 @@ client.on('message', async message => {
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
-    if (!client.commands.has(commandName)) return;
+	if (!client.commands.has(commandName)) return;
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 	if (command.args && !args.length) {
@@ -45,15 +46,15 @@ client.on('message', async message => {
 		if (command.usage) {
 			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
 		}
-	
+
 		return message.lineReplyNoMention(reply);
-		}
-	if(!command) return;
+	}
+	if (!command) return;
 
 	const { cooldowns } = client;
 
 	if (!cooldowns.has(command.name)) {
-	cooldowns.set(command.name, new Discord.Collection());
+		cooldowns.set(command.name, new Discord.Collection());
 	}
 
 	const now = Date.now();
@@ -73,8 +74,9 @@ client.on('message', async message => {
 
 	try {
 		client.commands.get(commandName).execute(message, args);
-		console.log(`${message.author.username}#${message.author.discriminator} ran \'${commandName}\' command.`);
-	} catch (error) {
+		console.log(`${message.author.username}#${message.author.discriminator} ran '${commandName}' command.`);
+	}
+	catch (error) {
 		console.error(error);
 		message.lineReplyNoMention('there was an error trying to execute that command!');
 	}
@@ -82,13 +84,13 @@ client.on('message', async message => {
 
 client.distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
 client.distube
-    .on("playSong", (message, queue, song) => message.channel.send(
-        `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`
+	.on('playSong', (message, queue, song) => message.channel.send(
+		`Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`,
 	))
-	.on("addSong", (message, queue, song) => message.channel.send(
-        `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`
-    ))
+	.on('addSong', (message, queue, song) => message.channel.send(
+		`Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`,
+	));
 
 
-keepAlive()
+keepAlive();
 client.login(token);
