@@ -8,7 +8,7 @@ module.exports = {
 		const avatarEmbed = new MessageEmbed()
 			.setColor(0x3d9af2)
 			.setAuthor(user.username)
-			.setImage(user.displayAvatarURL());
+			.setImage(user.displayAvatarURL({ format: 'png', size: 4096 }));
 		msg.lineReplyNoMention(avatarEmbed);
 	},
 };
